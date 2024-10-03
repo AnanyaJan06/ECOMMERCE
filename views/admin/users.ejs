@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details - eCommerce</title>
+    <link rel="stylesheet" href="css/admin/admin.css">
+    <style>
+        .user-list {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .user {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #d19c97;
+        }
+        .user .name {
+            flex: 1;
+        }
+        .user .actions {
+            flex: 0 0 auto;
+            
+        }
+        .user .actions .btn {
+            margin-left: 10px;
+        }
+        .btn{
+            background: #d19c97;
+            width: 100px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 style="padding-left: 160px;">User Details</h1>
+        </header>
+        <main>
+            <section class="user-list">
+                <% Users.forEach(function(user) { %>
+                    <div class="user">
+                        <span class="name"><%= user.name %></span>
+                        <div class="actions">
+                            <a href="/admin/users/<%= user._id %>/showdetailspage" class="bttn">Show Details</a>
+                            <% if (user.Block === true) { %>
+                                <form action="/admin/users/<%= user._id %>/unblock" method="POST" style="display: inline;">
+                                    <button type="submit" class="btn">UnBlock User</button>
+                                </form>
+                                <% } else { %>
+                            <form action="/admin/users/<%= user._id %>/block" method="POST" style="display: inline;">
+                                <button type="submit" class="btn">Block User</button>
+                            </form>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

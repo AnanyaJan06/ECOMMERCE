@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Category - Admin Page</title>
+    <link rel="stylesheet" href="/css/admin/addcategory.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- <h1>Add Category and Add Subcategory</h1> -->
+        </header>
+        <main>
+            <section>
+                <form action="/admin/viewcategories/<%= category._id %>/edit" method="POST" class="form">
+                    <h2>Edit Category</h2>
+                    <label for="category-name">Category Name:</label>
+                    <input type="text" id="categoryname" name="categoryname" value="<%= category.categoryname %>" required>
+                    <button type="submit" class="btn">Edit Category</button>
+                </form>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>
+

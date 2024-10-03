@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Products</title>
+    <link rel="stylesheet" href="/css/admin/viewproduct.css">
+</head>
+<body>
+    <div class="product-container">
+        <h1>Product List</h1>
+        <table class="product-info-table">
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Offer Price</th>
+                    <th>Size</th>
+                    <th>Stock</th>
+                    <th>Category</th>
+                    <th>Subcategory</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% productlist.forEach(function(product) { %>
+                    <tr>
+                        <td><img src="/uploads/<%= product.productimage[0] %>" alt="<%= product.productname %>"></td>
+                        <td><%= product.productname %></td>
+                        <td><%= product.productdescription %></td>
+                        <td>$<%= product.productprice %></td>
+                        <td><%= product.productofferprice ? '$' + product.productofferprice : 'N/A' %></td>
+                        <td><%= product.productsize %></td>
+                        <td><%= product.productstock %></td>
+                        <td><%= product.productcategory.categoryname %></td>
+                        <td><%= product.productsubcategory.subcategoryname %></td>
+                        <td><%= product.created_at.toDateString() %></td>
+                        <td><div class="actions">
+                            <form action="/admin/viewproducts/<%= product._id %>/edit" method="GET" style="display: inline;">
+                                <button type="submit" class="button">Edit</button>
+                            </form>
+                            <form action="/admin/viewproducts/<%= product._id %>/delete" method="POST" style="display: inline;">
+                                <button type="submit" class="button">Delete</button>
+                            </form></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

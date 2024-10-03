@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category - Admin Page</title>
+    <link rel="stylesheet" href="/css/admin/addcategory.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <section>
+                <form action="/admin/addcategory" method="POST" class="form">
+                    <h2>Add Category</h2>
+                    <label for="category-name">Category Name:</label>
+                    <input type="text" id="categoryname" name="categoryname" required>
+                    <button type="submit" class="btn">Add Category</button>
+                </form>
+                <form action="/admin/addsubcategory" method="POST" class="form">
+                    <h2>Add Subcategory</h2>
+                    <label for="subcategory-name">Subcategory Name:</label>
+                    <input type="text" id="subcategoryname" name="subcategoryname" required>
+
+                    <label for="category-id">Select Category:</label>
+                    <select id="category-id" name="categoryid" required>
+                        <% categories.forEach(function(category) { %>
+                            <option value="<%= category._id %>"><%= category.categoryname %></option>
+                        <% }); %>
+                    </select>
+                    <button type="submit" class="btn">Add Subcategory</button>
+                </form>
+                <div class="viewbutton-container">
+                 <button class="viewbutton" onclick="location.href='/admin/viewcategories'">View Categories</button> 
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+

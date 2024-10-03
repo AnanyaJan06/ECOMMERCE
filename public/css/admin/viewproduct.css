@@ -1,0 +1,113 @@
+/* styles.css */
+
+/* Basic reset for consistent styling across browsers */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.product-container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.product-info-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-info-table thead tr {
+    background-color: #d19c97;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.product-info-table th,
+.product-info-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.product-info-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.product-info-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.product-info-table tbody tr:last-of-type {
+    border-bottom: 2px solid #d19c97;
+}
+
+.product-info-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.product-info-table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .product-info-table thead {
+        display: none;
+    }
+
+    .product-info-table, 
+    .product-info-table tbody, 
+    .product-info-table tr, 
+    .product-info-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .product-info-table tr {
+        margin-bottom: 15px;
+    }
+
+    .product-info-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .product-info-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+.button{
+    background-color: #d19c97;
+    width: 60px;
+    border: none;
+}
+

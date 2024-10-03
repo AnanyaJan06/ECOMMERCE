@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Address Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group input[type="submit"] {
+            background-color: #d19c97;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #a56862;
+        }
+        .address-list {
+            margin-top: 20px;
+        }
+        .address-item {
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>User Address</h2>
+    <form action="/homepage/address" method="post">
+        <div class="form-group">
+            <label for="street">First Name:</label>
+            <input type="text" id="fname" name="fname" required>
+        </div>
+        <div class="form-group">
+            <label for="street">Last Name:</label>
+            <input type="text" id="lname" name="lname" required>
+        </div>
+        <div class="form-group">
+            <label for="street">Street:</label>
+            <input type="text" id="street" name="street" required>
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
+        </div>
+        <div class="form-group">
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" name="zip" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required>
+        </div>
+        <div class="form-group">
+            <label for="landmark">Landmark:</label>
+            <input type="text" id="landmark" name="landmark">
+        </div>
+        <div class="form-group">
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+    <div class="address-list">
+        <% if (addresses && addresses.length > 0) { %>
+            <h3>Saved Addresses</h3>
+            <% addresses.forEach(function(address) { %>
+                <div class="address-item">
+                    <p><strong>first Name:</strong> <%= address.fname %></p>
+                    <p><strong>Last Name:</strong> <%= address.lname %></p>
+                    <p><strong>Street:</strong> <%= address.street %></p>
+                    <p><strong>City:</strong> <%= address.city %></p>
+                    <p><strong>State:</strong> <%= address.state %></p>
+                    <p><strong>Zip Code:</strong> <%= address.zip %></p>
+                    <p><strong>Country:</strong> <%= address.country %></p>
+                    <p><strong>Landmark:</strong> <%= address.landmark %></p>
+                    <p><strong>Mobile Number:</strong> <%= address.mobile %></p>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>No addresses saved.</p>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>

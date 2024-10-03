@@ -1,0 +1,63 @@
+<head>
+<link rel="stylesheet" href="/css/wishlist.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<title>Wishlist & Collections</title>
+</head>
+<body>
+  <div class="header">
+    <h1>Wishlist & Collections</h1>
+  </div>
+  <div class="tabs">
+    <button class="tab active">My collections</button>
+    <button class="tab">Collections I follow</button>
+  </div>
+  <div class="wishlist">
+    <h2>My Wishlist</h2>
+    <% wishlistItems.Items.forEach(Item=>{ %>
+    <div class="wishlist-items">
+        <div class="wishlist-item">
+          <img src="/uploads/<%= Item.productId.productimage[0] %>" alt="<%= Item.productId.productimage %>">
+          <p><%= Item.productId.productname %></p>
+          <h4><del>$<%= Item.productId.productprice %></del>&nbsp;&nbsp;$<%= Item.productId.productofferprice %></h3>
+            <form action="/homepage/shop/<%= Item.productId._id %>/cart" method="POST" class="d-inline">
+              <button style="background: #d19c97; border: none;" type="submit" class="btn btn-sm text-dark p-0">
+                <i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart
+              </button>
+            </form>
+            <button style="background: #d19c97; border: none;" class="btn btn-sm btn-primary remove-btn" data-item-id="<%= Item.productId._id %>">
+              <i class="fa fa-times"></i> Remove
+            </button>
+        </div>
+    </div>
+    <% }) %>
+  </div>
+  <button class="create-collection">+ Create a new collection</button>
+
+  <script>
+   document.querySelectorAll('.remove-btn').forEach(button => {
+      button.addEventListener('click', function(event) {
+        const itemId = this.getAttribute('data-item-id');
+        console.log(itemId);
+
+        fetch(`/homepage/wishlist/remove/${itemId}`, {
+          method: 'POST',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({ItemId:itemId})
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+          alert(data.message);
+          console.log("removed from collection");
+          window.location.reload();
+          } else {
+            alert('Failed to remove item');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+      });
+    }); 
+  </script>
+

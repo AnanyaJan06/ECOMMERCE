@@ -1,0 +1,217 @@
+<link rel="stylesheet" href="/css/usersignup.css">
+  <div class="wrapper">
+    <h2>Registration</h2>
+    <form id="form" action="/signup" method="post" novalidate>
+      <div class="input-box">
+        <input id="username" type="text" placeholder="name"  required name="name">
+        <div id="name_error" style="color: red;font-size: small;"></div>
+      </div>
+      <div class="input-box">
+        <input id="email" type="text" placeholder="email"  required name="email">
+        <div id="email_error"  style="color: red;font-size: small;"></div>
+      </div>
+      <div class="input-box">
+        <input id="password" type="password" placeholder="password"  required name="password">
+         <div id="password_error" style="color: red;font-size: 9px;"></div>
+      </div>
+      <div class="input-box">
+        <input id="cnfrmpassword" type="password" placeholder="Confirm password" required  name="cnfrmpassword">
+        <div id="cnfrmpassword_error" style="color: red;font-size: small;"></div>
+      </div>
+      <div class="input-box">
+        <input id="phone" type="text" placeholder="Phone number" required name="phone">
+        <div id="phone_error" style="color: red;font-size: small;"></div>
+     </div>
+     <button type="button" id="sendOtpBtn" style="width:100px;border-radius: 5px;background: #d19c97;color: #fff">Send OTP</button>
+    <div class="input-box">
+      <input id="otp" type="text" placeholder="Enter OTP" required name="otp">
+      <div id="otp_error" style="color: red;font-size: small;"></div>
+      <button type="button" id="verifyOtpBtn" style="width: 100px;height: 21px;border-radius: 5px;
+      margin-left: 260px;margin-top: 15px;background:#d19c97;color:#fff;">Verify OTP</button>
+    </div>
+      <div class="policy">
+        <input type="checkbox" id="terms">
+        <h3 id="terms_label">I accept all terms & condition</h3>
+      </div>
+      <div class="input-box button">
+        <input type="Submit" value="Register Now">
+      </div>
+      <div class="text">
+        <h3>Already have an account? <a href="/login">Login now</a></h3>
+        <div class="error" style="color: red;">
+          <p> <%= errormessage %> </p>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+    const form=document.getElementById('form');
+    const username=document.getElementById('username');
+    const nameError=document.getElementById('name_error');
+    const email=document.getElementById('email');
+    const emailError=document.getElementById('email_error');
+    const password=document.getElementById('password');
+    const passwordError=document.getElementById('password_error');
+    const cnfrmpassword=document.getElementById('cnfrmpassword');
+    const cnfrmpasswordError=document.getElementById('cnfrmpassword_error');
+    const phone = document.getElementById('phone');
+    const phoneError = document.getElementById('phone_error');
+    const otp = document.getElementById('otp');
+    const otpError = document.getElementById('otp_error');
+    const sendOtpBtn = document.getElementById('sendOtpBtn');
+    const terms = document.getElementById('terms');
+    const termsLabel = document.getElementById('terms_label');
+    
+    form.addEventListener('submit',(event)=>{
+        const usernameValue=username.value.trim();
+        const emailValue=email.value.trim();
+        const passwordValue=password.value.trim();
+        const cnfrmpasswordValue=cnfrmpassword.value.trim();
+        const phoneValue = phone.value.trim();
+        const otpValue = otp.value.trim();
+        let valid = true;
+    
+        //Name validation
+        if(usernameValue === ''){
+            nameError.innerText="Name is required"
+            event.preventDefault();
+        }else if(usernameValue.length < 3){
+            nameError.innerText="Name should contain atleast 3 characters"
+            event.preventDefault();
+        }else{
+          nameError.innerText = ""
+        }
+        //Email validation
+        const emailRegex = /^[a-zA-Z0-9]{5,30}@[a-zA-Z]{2,7}.[a-zA-Z]{1,5}$/;
+        if(emailValue===''){
+          emailError.innerText="Email is required"
+          event.preventDefault();
+        }else if(!emailRegex.test(emailValue)){
+          emailError.innerText="Enter a valid email"
+          event.preventDefault();
+        }else{
+          emailError.innerText=""
+        }
+        //password validation
+        const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        if(passwordValue===''){
+          passwordError.innerText="Enter password"
+          event.preventDefault();
+        }else if(!passRegex.test(passwordValue)){
+          passwordError.innerText="Password should contain uppercase,lowercase,numbers and atleast 8 digits"
+          event.preventDefault();
+        }else{
+          passwordError.innerText=""
+        }
+        // confirm password validation
+        if(cnfrmpasswordValue===''){
+          cnfrmpasswordError.innerText="Please confirm password"
+          event.preventDefault();
+        }else if(cnfrmpasswordValue!=passwordValue){
+          cnfrmpasswordError.innerText="Password Mismatch"
+          event.preventDefault();
+        }
+        else{
+           cnfrmpasswordError.innerText=''
+        }
+        //phone validation
+        const phoneRegex = /^[0-9]{10}$/;
+        if(phoneValue === ''){
+          phoneError.innerText ='Phone number is required';
+          event.preventDefault();
+        }else if(!phoneRegex.test(phoneValue)) {
+          phoneError.innerText ="Enter a valid phone number";
+          event.preventDefault();
+        } else {
+           phoneError.innertext= '';
+        }
+        //otp validation
+        if(otpValue === ''){
+          otpError.innerText ="OTP is required";
+          event.preventDefault();
+        } else {
+          otpError.innerText = '';
+        }
+
+       // Terms and conditions validation
+      if (!terms.checked) {
+      termsLabel.classList.remove('vibrate');
+      void termsLabel.offsetWidth; // Trigger reflow to restart the animation
+      termsLabel.classList.add('vibrate');
+      valid = false;
+    } else {
+      termsLabel.classList.remove('vibrate');
+    }
+    
+    if (!valid) {
+      event.preventDefault();
+    }
+    });
+
+// Add event listener for send otp
+
+  sendOtpBtn.addEventListener('click',()=>{
+   const phoneValue = phone.value.trim();
+   const phoneRegex = /^[0-9]{10}$/;
+
+   if (phoneValue === ''){
+    phoneError.innerText= "Phone number is required";
+   }else if(!phoneRegex.test(phoneValue)){
+    phoneError.innerText= "Enter a valid phone number";
+   }else{
+    phoneError.innerText= '';
+    //send otp request to the server
+    fetch('/send-otp',{
+       method:'POST',
+       headers:{
+        'Content-Type': 'application/json',
+       },
+       body:JSON.stringify({phone:phoneValue}),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data.success){
+        alert('OTP sent successfully');
+      }else{
+        alert('Failed to sent OTP');
+      }
+    })
+    .catch(error =>{
+       console.log("Error sending OTP:",error);
+    })
+  }
+ });
+
+ // Add event listener for verify otp
+
+ verifyOtpBtn.addEventListener('click',()=>{
+     const otpValue=otp.value.trim();
+     if(otpValue === ''){
+      otpError.innerText="OTP must be required"
+     }else{
+      otpError.innerText='';
+      // sent verify request to the server
+      fetch('/verify-otp',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify({otp:otpValue})
+      })
+      .then(response =>response.json())
+      .then(data=>{
+        console.log(data);
+        if(data.success === true){
+          alert('OTP verified Successfully');
+        }else if(data.success === false){
+          alert('Failed to OTP verification');
+        }
+      })
+      .catch(error =>{
+        console.log("An error occured",error);
+      })
+     }
+ });
+
+</script>
+    

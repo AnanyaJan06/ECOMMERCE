@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="/css/admin/admin.css">
+    <style>
+        .user-details {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .user-details h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .user-details p {
+            margin: 10px 0;
+        }
+        .address-block {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+        .address-block p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>User Details</h1>
+        </header>
+        <main>
+            <section class="user-details">
+                <h2><%= details.name %></h2>
+                <p><strong>Email:</strong> <%= details.email %></p>
+                <% if((details.address.length)>0) {  %> 
+                <% details.address.forEach(function(add) { %>
+                <div class="address-block">
+                    <p><strong>Street:</strong> <%= add.street %></p>
+                    <p><strong>City:</strong> <%= add.city %></p>
+                    <p><strong>State:</strong> <%= add.state %></p>
+                    <p><strong>Zip:</strong> <%= add.zip %></p>
+                    <p><strong>Country:</strong> <%= add.country %></p>
+                    <p><strong>Landmark:</strong> <%= add.landmark %></p>
+                    <p><strong>Mobile:</strong> <%= add.mobile %></p>
+                </div>
+                <% }) %>
+                <% } else { %>
+                    <p>No addresses saved.</p>
+                <% } %>
+                <a href="/admin/users" class="btn">Back to User List</a>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Categories - Admin Page</title>
+    <link rel="stylesheet" href="/css/admin/viewcategory.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Categories and Subcategories</h1>
+        </header>
+        <main>
+            <section>
+                <% if (categories && categories.length) { %>
+                    <div class="categories">
+                        <% categories.forEach(function(category) { %>
+                            <div class="category">
+                                <div class="category-header">
+                                    <strong><%= category.categoryname %></strong>
+                                    <div class="category-buttons">
+                                        <form action="/admin/viewcategories/<%= category._id %>/edit" method="GET" style="display: inline;">
+                                            <button type="submit" class="button">Edit</button>
+                                        </form>
+                                        <form action="/admin/viewcategories/<%= category._id %>/delete" method="POST" style="display: inline;" class="delete-category-form">
+                                            <button type="button" class="button delete-category-button" data-category-id="<%= category._id %>">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <% if (category.subcategory && category.subcategory.length) { %>
+                                    <div class="subcategories">
+                                        <% category.subcategory.forEach(function(subcategory) { %>
+                                            <div class="subcategory">
+                                                <div class="subcategory-header">
+                                                    <%= subcategory.subcategoryname %>
+                                                    <div class="subcategory-buttons">
+                                                        <form action="/admin/viewsubcategories/<%= subcategory._id %>/edit" method="GET" style="display: inline;">
+                                                            <button type="submit" class="button">Edit</button>
+                                                        </form>
+                                                        <form action="/admin/viewsubcategories/<%= subcategory._id %>/delete" method="POST" style="display: inline;">
+                                                            <button type="submit" class="button">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% }); %>
+                                    </div>
+                                <% } else { %>
+                                    <div class="subcategories">
+                                        <div class="subcategory">No subcategories</div>
+                                    </div>
+                                <% } %>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } else { %>
+                    <p>No categories available.</p>
+                <% } %>
+                <a href="/admin/addcategory"><button class="btn">Back to Add Category</button></a>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-category-button');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const categoryId = this.getAttribute('data-category-id');
+                    const form = this.closest('.delete-category-form');
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "If you delete this category, all subcategories and products under this category will also be deleted!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d19c97',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

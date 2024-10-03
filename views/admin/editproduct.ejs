@@ -1,0 +1,92 @@
+<title>Add Product - eCommerce</title>
+<link rel="stylesheet" href="/css/admin/editproduct.css">
+<div class="container">
+    <header>
+        <h1 class="h1">Edit Product</h1>
+    </header>
+    <main>
+        <section class="form-container">
+            <form action="/admin/viewproducts/<%= editproduct._id %>/edit" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">Product Name</label>
+                    <input type="text" id="name" name="productname" value="<%= editproduct.productname %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="productdescription"  rows="5" required><%= editproduct.productdescription %></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="productprice" value="<%= editproduct.productprice %>" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="offerprice">Offer Price</label>
+                    <input type="number" id="offerprice" name="productofferprice" value="<%= editproduct.productofferprice %>" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                     <select id="category" name="productcategory"  required>
+                        <% categories.forEach(category => { %>
+                            <option value="<%= category._id %>" <%= category._id.toString() === editproduct.productcategory._id.toString() ? 'selected' : '' %>>
+                                <%= category.categoryname %>
+                            </option>
+                        <% }); %>
+                    </select> 
+                </div>
+                <div class="form-group">
+                    <label for="subcategory">Subcategory</label>
+                    <select id="subcategory" name="productsubcategory" required>
+                        <% subcategories.forEach(subcategory => { %>
+                        <option value="<%= subcategory._id %>" <%= subcategory._id.toString() === editproduct.productsubcategory._id.toString() ? 'selected' : '' %>>
+                            <%= subcategory.subcategoryname %>
+                        </option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="size">Size</label>
+                    <select id="size" name="productsize"  required>
+                        <option value="small" <%= editproduct.productsize === 'small' ? 'selected' : '' %>>Small</option>
+                        <option value="medium" <%= editproduct.productsize === 'medium' ? 'selected' : '' %>>Medium</option>
+                        <option value="large" <%= editproduct.productsize === 'large' ? 'selected' : '' %>>Large</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input type="number" id="stock" name="productstock" value="<%= editproduct.productstock %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" id="image" name="productimage" accept="image/*" multiple >
+                    <div class="img-preview">
+                     <% editproduct.productimage.forEach(image =>{ %>
+                    <img class="img" src="/uploads/<%= image %>" alt="<%= editproduct.productname %>">
+                    <% }); %>
+                </div>
+                </div>
+                <button type="submit" class="btn">Edit Product</button>
+            </form>
+        </section>
+    </main>
+</div>
+<script>
+    document.getElementById('category').addEventListener('change',function(){
+        const categoryid=this.value;
+        console.log(categoryid);
+        if(categoryid){
+            const response = fetch(`/admin/subcategories/${categoryid}`)
+            .then(response=>response.json())
+            .then(data=>{
+                const subcategorySelect=document.getElementById('subcategory');
+                subcategorySelect.innerHTML= '';
+                data.forEach(subcategory =>{
+                    const option = document.createElement('option');
+                    option.value = subcategory._id;
+                    option.textContent=subcategory.subcategoryname;
+                    subcategorySelect.appendChild(option);
+                });
+            })
+            .catch(error =>console.error('Error fetching subcategories:', error)); 
+            }       
+                });
+</script>

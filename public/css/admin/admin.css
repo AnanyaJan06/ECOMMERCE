@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #ddd;
+}
+
+main {
+    padding-top: 20px;
+}
+
+section h2 {
+    margin-top: 0;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.product-item {
+    background-color: #fafafa;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: calc(33.333% - 10px);
+    box-sizing: border-box;
+}
+
+.product-item h3 {
+    margin-top: 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #d19c97;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 10px 0;
+    width: 200px; /* adjust this value as needed */
+    text-align: center; /* optional: centers the text within the buttons */
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn:hover {
+    background-color: #b76d66;
+}
+
+.btn-danger {
+    background-color: #b76d66;
+}
+
+.btn-danger:hover {
+    background-color: #b76d66;
+}

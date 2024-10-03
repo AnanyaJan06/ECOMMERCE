@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .header {
+    background-color: #d19c97;
+    color: white;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    margin: 0 5px;
+    background-color: #e0e0e0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .tab.active {
+    background-color: #d19c97;
+    color: white;
+  }
+  
+  .wishlist {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .wishlist-items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .wishlist-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .wishlist-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .create-collection {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #d19c97;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .wishlist-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .wishlist-item button {
+    margin-top: 5px;
+  }
+  
+  
